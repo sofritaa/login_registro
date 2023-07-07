@@ -51,5 +51,5 @@ def procesa_login():
 
 @app.route('/logout', methods=['GET', 'POST'])
 def procesa_logout():
-    session.clear()
-    return redirect('/')
+    session.clear() 
+    return redirect('/')   
