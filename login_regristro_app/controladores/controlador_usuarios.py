@@ -33,15 +33,14 @@ def desplegar_dashboard():
 @app.route('/login', methods=['POST'])
 def procesa_login():
     email = request.form.get('email_login')
-    password = request.form.get('password_login')
-
+    
     usuario = Usuario.obtener_uno_con_email(email)
 
-    if usuario is None:
+    if usuario == None:
         flash("Email inválido", "error_email_login")
         return redirect('/')
     else:
-        if not usuario.password or not bcrypt.check_password_hash(usuario.password, password):
+        if not bcrypt.check_password_hash( usuario.password, request.form['password_login'] ):
             flash("Contraseña incorrecta", 'error_password_login')
             return redirect('/')
         else:
